@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sana, Aşkım ❤️</title>
+<style>
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: Georgia, serif;
+  color: white;
+  background: linear-gradient(135deg, #3b1028, #a51d50, #f18ca9);
+  overflow-x: hidden;
+}
+main { padding: 24px; max-width: 500px; }
+h1 { font-size: 30px; }
+#heart {
+  font-size: 110px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  animation: beat 1s infinite;
+}
+@keyframes beat {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+#letter {
+  display: none;
+  background: #fff0f3;
+  color: #751b3b;
+  padding: 25px;
+  border-radius: 20px;
+  line-height: 1.9;
+  font-size: 19px;
+  animation: appear 1s ease;
+}
+#letter.show { display: block; }
+@keyframes appear {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.floating {
+  position: fixed;
+  bottom: -30px;
+  animation: float 5s linear forwards;
+  pointer-events: none;
+}
+@keyframes float {
+  to { transform: translateY(-110vh) rotate(35deg); opacity: 0; }
+}
+</style>
+</head>
+<body>
+<main>
+  <h1>Sana küçük bir sürprizim var, aşkım... 💕</h1>
+  <p>Kalbime dokun ❤️</p>
+
+  <button id="heart" aria-label="Mektubu aç">💗</button>
+
+  <section id="letter">
+    <p><b>İyi ki'lerimin en güzeli sensin aşkım. ❤️</b></p>
+    <p>Seni ilk gördüğüm günkü gibi güzelsin hâlâ.</p>
+    <p><b>Biz olduğumuz için çok mutluyum ve seni çok seviyorum. 💖</b></p>
+    <p>Sonsuz sevgimle... 💌</p>
+  </section>
+</main>
+
+<script>
+function makeHeart() {
+  const h = document.createElement("span");
+  h.className = "floating";
+  h.textContent = ["💗", "💕", "❤️", "💖"][Math.floor(Math.random()*4)];
+  h.style.left = Math.random()*100 + "vw";
+  h.style.fontSize = (18 + Math.random()*22) + "px";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 5000);
+}
+setInterval(makeHeart, 450);
+
+document.getElementById("heart").addEventListener("click", function() {
+  document.getElementById("letter").classList.add("show");
+  this.textContent = "💖";
+  this.style.animation = "none";
+  for(let i=0; i<15; i++) setTimeout(makeHeart, i*100);
+});
+</script>
+</body>
+</html>
